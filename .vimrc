@@ -1,0 +1,1 @@
+/home/dantheta/dotfiles/vimrc.seniorman.edited

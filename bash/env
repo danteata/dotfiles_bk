@@ -1,0 +1,4 @@
+export PATH=$PATH:$HOME/narwhal/bin
+export PATH=$PATH:/usr/share/apps/play
+
+export EDITOR="vim -N"
