@@ -2,3 +2,6 @@
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias pour='ls -lah'
+alias get='sudo apt-get install'
+alias nobashish='BASHISH_DISABLED=1'
