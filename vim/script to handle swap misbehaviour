@@ -1,0 +1,6 @@
+# Expects variables realfile, swapfile, recoveryfile.
+vim -r "$swapfile" -c ":wq! $recoveryfile" && rm "$swapfile"
+if cmp "$recoveryfile" "$realfile"
+then rm "$recoveryfile"
+else vimdiff "$recoveryfile" "$realfile"
+fi

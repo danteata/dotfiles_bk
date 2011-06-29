@@ -275,7 +275,7 @@
 
 		" some convenient mappings 
 		inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
-		inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+		"noremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
 		inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
 		inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
 		inoremap <expr> <C-d>	   pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
@@ -291,7 +291,10 @@
 	
 	" Ctags {
     " This will look in the current directory for 'tags', and work up the tree towards root until one is found. 
-		set tags=./tags;/,$HOME/vimtags
+        "set tags=./tags;/,$HOME/vimtags
+
+    	set tags=./tags,tags,$HOME/tags
+
         map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR> " C-\ - Open the definition in a new tab
         map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>      " A-] - Open the definition in a vertical split
 	" }
