@@ -69,7 +69,7 @@
 " }
 
 " Vim UI {
-	color solarized   	       		" load a colorscheme
+	color vividchalk  	       		" load a colorscheme
 	set tabpagemax=15 				" only show 15 tabs
 	set showmode                   	" display the current mode
 
