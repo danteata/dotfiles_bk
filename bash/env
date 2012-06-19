@@ -1,3 +1,4 @@
+export PATH=$PATH:$HOME/android-sdk-linux/platform-tools
 export PATH=$PATH:$HOME/narwhal/bin
 export PATH=$PATH:/usr/share/apps/play
 

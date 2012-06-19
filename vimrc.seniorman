@@ -12,8 +12,26 @@
 	" Basics {
 		set nocompatible 		" must be first line
 		set background=dark     " Assume a dark background
+        set rtp+=~/.vim/bundle/vundle
+        call vundle#rc()
 	" }
 
+" Bundles {
+	" fromGithub {
+    Bundle 'gmarik/vundle'
+    " with extension
+    Bundle 'nelstrom/vim-mac-classic-theme.git'
+    Bundle 'mattn/gist-vim'
+    Bundle 'mattn/webapi-vim'
+    Bundle 'skalnik/vim-vroom'
+    Bundle 'godlygeek/tabular'
+    Bundle 'gmarik/golife.vim'
+    Bundle 'mattn/zencoding-vim'
+    Bundle 'scrooloose/syntastic'
+    Bundle 'FuzzyFinder'
+    Bundle 'kchmck/vim-coffee-script'
+    Bundle 'carlosvillu/coffeScript-VIM-Snippets'
+	" }
 	" Windows Compatible {
 		" On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
 		" across (heterogeneous) systems easier. 
@@ -23,10 +41,11 @@
 	" }
     " 
 	" Setup Bundle Support {
+    call pathogen#infect()
 	" The next two lines ensure that the ~/.vim/bundle/ system works
-		runtime! autoload/pathogen.vim
-		silent! call pathogen#helptags()
-		silent! call pathogen#runtime_append_all_bundles()
+	"	runtime! autoload/pathogen.vim
+	"	silent! call pathogen#helptags()
+	"	silent! call pathogen#runtime_append_all_bundles()
 	" }
 
 " }
@@ -69,7 +88,7 @@
 " }
 
 " Vim UI {
-	color vividchalk  	       		" load a colorscheme
+    color vividchalk  	       		" load a colorscheme
 	set tabpagemax=15 				" only show 15 tabs
 	set showmode                   	" display the current mode
 
@@ -114,7 +133,7 @@
 	set foldenable  				" auto fold code
 	set gdefault					" the /g flag on :s substitutions by default
     set list
-    set listchars=tab:>.,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
+    set listchars=tab:>.,trail:.,extends:#,nbsp:. " Highlight problematic whit373|            """ Fuzzy Find file, tree, buffer, line
 
 
 " }
@@ -203,6 +222,27 @@
 		
 	" For when you forget to sudo.. Really Write the file.
 	cmap w!! w !sudo tee % >/dev/null
+
+    if exists(":Tabularize")
+      nmap <Leader>a= :Tabularize /=<CR>
+      vmap <Leader>a= :Tabularize /=<CR>
+      nmap <Leader>a: :Tabularize /:\zs<CR>
+      vmap <Leader>a: :Tabularize /:\zs<CR>
+    endif
+
+    inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+     
+    function! s:align()
+      let p = '^\s*|\s.*\s|\s*$'
+      if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+        let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+        let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+        Tabularize/|/l1
+        normal! 0
+        call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+      endif
+    endfunction
+
 " }
 
 " Plugins {
@@ -256,12 +296,15 @@
 	" }
 
 	" OmniComplete {
-		"if has("autocmd") && exists("+omnifunc")
-			"autocmd Filetype *
-				"\if &omnifunc == "" |
-				"\setlocal omnifunc=syntaxcomplete#Complete |
-				"\endif
-		"endif
+        if has("autocmd") && exists("+omnifunc")
+            autocmd Filetype *
+                \if &omnifunc == "" |
+                \setlocal omnifunc=syntaxcomplete#Complete |
+                \endif
+             autocmd FileType ruby set omnifunc=rubycomplete#Complete
+             autocmd FileType ruby let g:rubycomplete_buffer_loading=1
+             autocmd FileType ruby let g:rubycomplete_classes_in_global=1
+        endif
 
 		" Popup menu hightLight Group
 		"highlight Pmenu	ctermbg=13	guibg=DarkBlue
@@ -282,7 +325,7 @@
 		inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
 
         " and make sure that it doesn't break supertab
-        let g:SuperTabCrMapping = 0
+        "let g:SuperTabCrMapping = 0
         
 		" automatically open and close the popup menu / preview window
 		au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
@@ -376,6 +419,20 @@
 		
 		" Buffer explorer {
 			nmap <leader>b :BufExplorer<CR>
+            nnoremap <leader>l :ls<CR>
+            nnoremap <silent> <leader>b :bp<CR>
+            nnoremap <silent> <leader>f :bn<CR>
+            nnoremap <leader>g :e#<CR>
+            nnoremap <leader>1 :1b<CR>
+            nnoremap <leader>2 :2b<CR>
+            nnoremap <leader>3 :3b<CR>
+            nnoremap <leader>4 :4b<CR>
+            nnoremap <leader>5 :5b<CR>
+            nnoremap <leader>6 :6b<CR>
+            nnoremap <leader>7 :7b<CR>
+            nnoremap <leader>8 :8b<CR>
+            nnoremap <leader>9 :9b<CR>
+            nnoremap <leader>10 :10b<CR>
 		" }
 		
 		" VCS commands {
@@ -428,8 +485,9 @@
 	" GVIM- (here instead of .gvimrc)
 	if has('gui_running')
 		set guioptions-=T          	" remove the toolbar
-		set lines=40               	" 40 lines of text instead of 24,
-		set transparency=5          " Make the window slightly transparent
+		set lines=60               	" 40 lines of text instead of 24,
+    "works only on macvim 
+		"set transparency=5          " Make the window slightly transparent
 	else
 		set term=builtin_ansi       " Make arrow and other keys work
 	endif
@@ -446,7 +504,7 @@ function! InitializeDirectories()
 
   for [dirname, settingname] in items(dir_list)
 	  let directory = parent . '/' . prefix . dirname . "/"
-	  if exists("*mkdir")
+  if exists("*mkdir")
 		  if !isdirectory(directory)
 			  call mkdir(directory)
 		  endif
