@@ -8,7 +8,7 @@
 " Distributable under the same terms as Vim itself (see :help license)
 
 if has("gui_running")
-    set background=dark
+    set background=light
 endif
 hi clear
 if exists("syntax_on")
