@@ -1,4 +1,7 @@
 # some more ls aliases
+alias dantheta='echo THE NAME OF THE LORD IS A STRONG TOWER.'
+alias railsy='bundle exec rails s'
+alias go='foreman start'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'

@@ -1,5 +1,5 @@
-. ~/dotfiles/bash/env
+. ~/dotfiles.me/bash/env
 
-. ~/dotfiles/bash/config
+. ~/dotfiles.me/bash/config
 
-. ~/dotfiles/bash/aliases
+. ~/dotfiles.me/bash/aliases

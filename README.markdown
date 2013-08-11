@@ -1,2 +1,2 @@
-This contains all important configurations of my dotfiles.
+##This contains all important configurations of my dotfiles.
 

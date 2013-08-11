@@ -22,6 +22,7 @@
     " with extension
     Bundle 'nelstrom/vim-mac-classic-theme.git'
     Bundle 'mattn/gist-vim'
+    Bundle "digitaltoad/vim-jade"
     Bundle 'mattn/webapi-vim'
     Bundle 'skalnik/vim-vroom'
     Bundle 'godlygeek/tabular'
@@ -32,6 +33,8 @@
     Bundle 'FuzzyFinder'
     Bundle 'kchmck/vim-coffee-script'
     Bundle 'carlosvillu/coffeScript-VIM-Snippets'
+    Bundle 'chriskempson/vim-tomorrow-theme'
+    Bundle 'wavded/vim-stylus'
 	" }
 	" Windows Compatible {
 		" On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
@@ -147,6 +150,8 @@
 	set softtabstop=4 				" let backspace delete indent
     " for coffeescript formating
     au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+    " for jade formating
+    au BufNewFile,BufReadPost *.jade setl shiftwidth=2 expandtab
 	"set matchpairs+=<:>            	" match, to be used with % 
 	set pastetoggle=<F12>          	" pastetoggle (sane indentation on pastes)
 	"set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
