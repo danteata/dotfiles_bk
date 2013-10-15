@@ -1,4 +1,4 @@
-. ~/dotfiles/bash/env
+. ~/dotfiles/bash/environment
 
 . ~/dotfiles/bash/config
 
